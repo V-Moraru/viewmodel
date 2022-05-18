@@ -1,0 +1,43 @@
+<?php
+/** @var $viewModel \MageModule\Magento_CategoryLinks\ViewModel\CategoryLinksUrl */
+
+$viewModel = $block->getViewModel();
+
+?>
+
+<div class="category-sidebar">
+    <?php
+
+    if($viewModel->getCat()):
+    $subcategories=$viewModel->getCat()->getCategories($viewModel->getCat()->getId());
+    /* count and check the category have any sub category */
+    if($subcategories->count()>0){
+    ?>
+    <h3>Subcategories:</h3>
+    <ul class="list-category">
+        <?php
+        foreach($subcategories as $subcategory){
+            echo '<li class="parent-category"><a href="'.$this->getBaseUrl().$subcategory->getRequestPath().'"><strong class="title">' . $subcategory->getName() . '</strong></a>';
+            if($subcategory->getChildrenCount() > 0)
+            {
+                $subcategories2=$viewModel->getCat()->getCategories($subcategory->getId());
+                echo "<ul class='sub-menu'>";
+                foreach ($subcategories2 as $subsub) {
+                    if ($subsub->getIsActive()) {
+                        echo '<li><a href="'.$this->getBaseUrl().$subsub->getRequestPath().'">' . $subsub->getName() . '</a></li>';
+                    }
+                }
+                echo "</ul>";
+            }
+            echo '</li>';
+        }
+
+        }else{
+            // category does not have any sub category
+        }
+        else:
+            // category does not have any sub category
+            echo "</ul>";
+        endif;
+        ?>
+</div>

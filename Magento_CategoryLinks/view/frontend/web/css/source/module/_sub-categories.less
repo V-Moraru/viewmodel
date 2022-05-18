@@ -1,0 +1,22 @@
+& when (@media-common = true) {
+    .category-sidebar {
+        color: @color-drexel-black;
+        padding: 0 10px;
+
+        ul {
+            list-style: none;
+            padding: 10px 15px;
+
+            li a {
+                color: @color-drexel-gray;
+                text-decoration: none;
+                transition: all .3s ease-in;
+
+                &:hover {
+                    color: @color-drexel-black;
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+}
