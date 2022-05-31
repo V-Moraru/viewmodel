@@ -18,8 +18,10 @@ class CategoryLinksUrl implements \Magento\Framework\View\Element\Block\Argument
         $this->view = $view;
     }
 
-    public function getCat()
+    public function getSubCat()
     {
-        return $this->view->getCurrentCategory();
+        $subcategories=$this->view->getCurrentCategory()->getCategories($this->view->getCurrentCategory()->getId());
+
+        return $subcategories;
     }
 }
